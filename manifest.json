@@ -1,0 +1,32 @@
+{
+    "manifest_version": 2,
+    "name": "__MSG_extensionName__",
+    "description": "__MSG_extensionDescription__",
+    "version": "0.1",
+    "author": "Volker Schmid",
+    "homepage_url": "http://www.inspirant.de",
+    "default_locale": "en",
+    "applications": {
+        "gecko": {
+            "id": "phoneToLink@inspirant.de",
+            "strict_min_version": "91.0",
+            "strict_max_version": "104.*"
+        }
+    },
+    "icons": {
+        "64": "images/ico_tel_64.png",
+        "32": "images/ico_tel_32.png",
+        "16": "images/ico_tel_16.png"
+    },
+    "background": {
+        "scripts": [ "background.js" ]
+    },
+    "options_ui": {
+        "page": "options.html"
+    },
+    "permissions": [
+        "messagesModify",
+        "messagesRead",
+        "storage"
+    ]
+}

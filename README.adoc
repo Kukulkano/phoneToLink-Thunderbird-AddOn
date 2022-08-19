@@ -1,0 +1,72 @@
+= phoneToLink Thunderbird Add-on
+:author: volker.schmid
+:email: v.schmid@inspirant.de
+:toc:
+:doctype: book
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+This is the source code for the phoneToLink Thunderbird Add-on.
+
+== How to get the Add-on
+
+The current Add-on is available to Thunderbird users at the Mozilla Add-on store. Please find the phoneToLink Thunderbird Add-on here:
+https://addons.thunderbird.net/de/thunderbird/addon/phoneToLink/
+
+Alternatively, open the Thunderbird menu -> Add-ons and themes -> Extensions and use the search bar on top to search for _phoneToLink_. From there, you can run the setup directly.
+
+== The Add-on functionality
+
+Currently, the phoneToLink Thunderbird Add-on offers to replace any phone numbers in *displayed email messages* with a clickable `callto:` link.
+
+It does *not* make numbers clickable in *address book* because the WebExtension API of Thunderbird does not yet offer adequate functionality to do this (as of August 2022).
+
+=== Recognized phone number formats
+
+The AddOn will recognize phone numbers of the following types:
+
+`0123 456\789` +
+`00123 456/789` +
+`+49123 456-789` +
+`+49 (1234) 56-789` +
+`0049 (1234) 56789-10` +
+`+4912345678` +
+`012345678`
+
+=== Not working
+
+Anything that does not start with `+` or `0` like +
+`49 (1234) 56-789` +
+`12345678`
+
+=== False positives
+
+There will be false positives for numbers that match the above rules accidentially. For example, numbers starting with `+` or `0`. Just don't click them!
+
+Also, numbers that consist of more than 7 blocks including the first character (`+` or `0`) may be incomplete.
+
+
+== Not working with Thunderbird XX
+
+This usually happens if the Thunderbird version increased and exceeds the maximum version of the AddOn.
+
+I do not find myself responsible for updating every few months as long as it works fine for me. Please respect that I developed and maintain this AddOn in my spare time.
+
+I compile and upload this AddOn only if I need it. There is a high chance that I didn't update the AddOn yet because I did not need it. 
+
+This is why this is open source. You can open the xpi file (using any unzip tool) and try to increase the `strict_max_version` in the _manifest.json_ file by yourself. Or you find someone else who is forking this?
+
+== Self compile
+
+The Add-on is not really to become compiled. It is JavaScript code in a ZIP file. You simply have to run `make` on a Linux system to let it zip all the content together into a valid .xpi file.
+
+Run `make clean` to cleanup the folder from previous .xpi files.
+
+== License information
+
+The phoneToLink Thunderbird Add-on is released as free software under the GPL license (GPLv3). You can redistribute it and/or modify it under the terms of this license which you can read by viewing the included LICENSE file.

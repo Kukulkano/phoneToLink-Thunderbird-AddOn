@@ -1,0 +1,4 @@
+{
+    "extensionName": { "message": "phoneToLink" }, 
+    "extensionDescription": { "message": "Display phone numbers as link for dialing (skype, tapi, voip, sip etc)" }
+}

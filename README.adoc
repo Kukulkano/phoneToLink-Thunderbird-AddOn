@@ -20,6 +20,16 @@ https://addons.thunderbird.net/de/thunderbird/addon/phoneToLink/
 
 Alternatively, open the Thunderbird menu -> Add-ons and themes -> Extensions and use the search bar on top to search for _phoneToLink_. From there, you can run the setup directly.
 
+== Not working with my Thunderbird / outdated?
+
+This usually happens if the Thunderbird version increased and exceeds the maximum version of the AddOn.
+
+I do not find myself responsible for updating every few months as long as it works fine for me. Please respect that I developed and maintain this AddOn in my spare time.
+
+I compile and upload this AddOn only if I need it. There is a high chance that I didn't update the AddOn yet because I did not need it. 
+
+This is why this is open source. You can open the xpi file (using any unzip tool) and try to increase the `strict_max_version` in the _manifest.json_ file by yourself. Or you find someone else who is forking this?
+
 == The Add-on functionality
 
 Currently, the phoneToLink Thunderbird Add-on offers to replace any phone numbers in *displayed email messages* with a clickable `callto:` link.
@@ -49,17 +59,6 @@ Anything that does not start with `+` or `0` like +
 There will be false positives for numbers that match the above rules accidentially. For example, numbers starting with `+` or `0`. Just don't click them!
 
 Also, numbers that consist of more than 7 blocks including the first character (`+` or `0`) may be incomplete.
-
-
-== Not working with Thunderbird XX
-
-This usually happens if the Thunderbird version increased and exceeds the maximum version of the AddOn.
-
-I do not find myself responsible for updating every few months as long as it works fine for me. Please respect that I developed and maintain this AddOn in my spare time.
-
-I compile and upload this AddOn only if I need it. There is a high chance that I didn't update the AddOn yet because I did not need it. 
-
-This is why this is open source. You can open the xpi file (using any unzip tool) and try to increase the `strict_max_version` in the _manifest.json_ file by yourself. Or you find someone else who is forking this?
 
 == Self compile
 

@@ -1,0 +1,10 @@
+phoneToLink Thunderbird AddOn manifest information:
+=====================================================================
+
+Find currently valid TB versions for your manifest file here:
+https://addons.thunderbird.net/en-US/thunderbird/pages/appversions/
+
+Use the nn.* versions whenever possible.
+
+All about AddOns, updates and submission happens here:
+https://addons.thunderbird.net/de/developers/addons

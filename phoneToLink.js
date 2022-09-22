@@ -14,8 +14,11 @@ async function makeLinks() {
     // replace numbers
     let body = document.body.innerHTML;
 
+    // cleanup weird linebreaks that hinder number detection
+    body = body.replace(/[\r|\n]{1}\s{0,40}/g, " ");
+
     // HINT: Copy this to https://regex101.com for validation and testing
-    const r = /(\<a .*?a\>|[$\s\()]{1}(00|0|\+|&#43;|&plus;)\s?(\d{2,})(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*))/igs;
+    const r = /(\<a .*?a\>|[\s>\(]{1}(00|0|\+|&#43;|&plus;){1}\s?(\d{2,})(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*))/igs;
 
     body = body.replace(r, telReplace);
 
@@ -29,8 +32,20 @@ function telReplace(m, f1, f2, f3, f4, f5, f6, f7, f8) {
         // keep found links like they are
         return m;
     }
-    let number = f2+f3+f4+f5+f6+f7+f8;
-    return ' <a href="'+proto+number.trim()+'">'+m.trim()+'</a>';
+
+    m = m.trim();
+
+    let number = (f2+f3+f4+f5+f6+f7+f8).trim();
+    if (m.substr(0,1) == ">") {
+        m = m.substr(1); // cut pre >
+        return '><a href="'+proto+number+'">'+m+'</a>';
+    }
+    if (m.slice(-1) == "&") {
+        m = m.slice(0, -1); // cut pre >
+        return '<a href="'+proto+number+'">'+m+'</a>&';
+    }
+    console.log("use", m, number);
+    return ' <a href="'+proto+number+'">'+m+'</a>';
 }
 
 makeLinks()

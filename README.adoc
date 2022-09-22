@@ -50,6 +50,8 @@ The AddOn will recognize phone numbers of the following types:
 `+4912345678` +
 `012345678`
 
+The leading plus also may be encoded like &#43; or &plus; to work.
+
 === Not working
 
 Anything that does not start with `+` or `0` like +

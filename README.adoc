@@ -15,10 +15,9 @@ This is the source code for the phoneToLink Thunderbird Add-on.
 
 == How to get the Add-on
 
-The current Add-on is available to Thunderbird users at the Mozilla Add-on store. Please find the phoneToLink Thunderbird Add-on here:
-https://addons.thunderbird.net/de/thunderbird/addon/phoneToLink/
+The current Add-on is not yet available in the official Thunderbird AddOn place. I decided against this because there is no API available to make numbers clickable in address book. Thus, I think it is currently not of that much use.
 
-Alternatively, open the Thunderbird menu -> Add-ons and themes -> Extensions and use the search bar on top to search for _phoneToLink_. From there, you can run the setup directly.
+Alternatively, download the source to a linux machine and run make (see <<Self compile>> chapter below). The resulting .xpi file can get loaded as AddOn in Thunderbird.
 
 == Not working with my Thunderbird / outdated?
 
@@ -38,19 +37,22 @@ It does *not* make numbers clickable in *address book* because the WebExtension 
 
 === Recognized phone number formats
 
-The AddOn will recognize phone numbers of the following types:
+The AddOn will recognize phone numbers in the following formats (examples):
 
 `0123 456\789` +
 `00123 456/789` +
 `+49123 456-789` +
 `+ 49 123 456-789` +
 `+49 (1234) 56-789` +
+`(+49) 1234 56-789` +
 `0049 (1234) 56789-10` +
 `00 49 123 45678` +
 `+4912345678` +
 `012345678`
 
-The leading plus also may be encoded like &#43; or &plus; to work.
+The leading plus also can be encoded like `\&#43;` or `\&plus;`.
+
+Please note that there are still conditions where the number is not recognized. For axample, if there are linebreaks between the number blocks or after a leading + etc. This is not covered (yet?).
 
 === Not working
 
@@ -63,6 +65,8 @@ Anything that does not start with `+` or `0` like +
 There will be false positives for numbers that match the above rules accidentially. For example, numbers starting with `+` or `0`. Just don't click them!
 
 Also, numbers that consist of more than 7 blocks including the first character (`+` or `0`) may be incomplete.
+
+I also found that sometimes it destroys the body of messages if it tries to inject a link to some existing link or certain structure. If you find such, please open an issue and post the HTML source of the affected part of the body (in Thunderbird, press Ctrl+u to see the source of an email, don't know for Outlook). I will have a look then.
 
 == Self compile
 

@@ -15,7 +15,10 @@ async function makeLinks() {
     let body = document.body.innerHTML;
 
     // cleanup weird linebreaks that hinder number detection
-    body = body.replace(/[\r|\n]{1}\s{0,40}/g, " ");
+    if (body.search("<body") != -1) {
+        // only for html bodies
+        body = body.replace(/[\r|\n]{1}\s{0,40}/g, " ");
+    }
 
     // HINT: Copy this to https://regex101.com for validation and testing
     const r = /(\<a .*?a\>|[\s>\(]{1}(00|0|\+|&#43;|&plus;){1}\s?(\d{2,})(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*))/igs;

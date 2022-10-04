@@ -14,14 +14,17 @@ async function makeLinks() {
     // replace numbers
     let body = document.body.innerHTML;
 
+    console.log(body);
+
     // cleanup weird linebreaks that hinder number detection
-    if (body.search("<body") != -1) {
+    if (body.search("<body") != -1 || body.search("<table") != -1 || body.search("<div") != -1) {
         // only for html bodies
         body = body.replace(/[\r|\n]{1}\s{0,40}/g, " ");
+        body = body.replace(/\s{2,40}/g, " ");
     }
 
     // HINT: Copy this to https://regex101.com for validation and testing
-    const r = /(\<a .*?a\>|[\s>\(]{1}(00|0|\+|&#43;|&plus;){1}\s?(\d{2,})(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*))/igs;
+    const r = /(\<a .*?a\>|\<style.*?style\>|{.*?}|style=".*?"|[\s>\(]{1}(00|0|\+|&#43;|&plus;){1}\s?(\d{2,})(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*)(?:[ -\/\\\(\)]){0,2}(\d*))/igs;
 
     body = body.replace(r, telReplace);
 
@@ -31,8 +34,11 @@ async function makeLinks() {
 function telReplace(m, f1, f2, f3, f4, f5, f6, f7, f8) {
     // console.log(m, f1, f2, f3, f4, f5, f6, f7, f8);
 
-    if (f1.substr(0, 1) === "<") {
-        // keep found links like they are
+    if (f1.substr(0, 1) === "<" || 
+        f1.substr(0, 1) === "{" || 
+        f1.substr(0, 5) === "style" || 
+        f1.substr(0, 6) === "<style") {
+        // keep found links, curlys and style tags like they are
         return m;
     }
 
